@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>Scanning Client Example</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="stylesheet" href="/build/bundle.css" />
+  </head>
+  <body>
+    <a onclick="openScanner()">Open scanner tool</a>
+    <script>
+      function openScanner() {
+        let s = window.open(`./index.html#scan-and-post-to-${window.origin}`);
+        window.addEventListener('message', (event) => {
+          console.log('MSG', event);
+          if (event.origin !== window.origin) {
+            return;
+          }
+          if (event.source !== s) {
+            return;
+          }
+          if (!event.data.validated) {
+            return;
+          }
+          console.log('Received health card', event.data);
+        });
+      }
+    </script>
+  </body>
+</html>
