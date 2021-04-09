@@ -71,7 +71,7 @@
     grid-column: 2/3;
     object-fit: cover;
     width: min(100vmin, 100%);
-    height: min(100vh, 100%);
+    height: min(60vh, 100%);
     border-radius: 10vmin;
     justify-self: center;
   }
