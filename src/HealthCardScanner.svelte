@@ -1,5 +1,5 @@
 <script lang="ts">
-  import QrScanner from 'qr-scanner';
+  import QrScanner from './vendor/qr-scanner';
   import { createEventDispatcher, onMount } from 'svelte';
   import { fade } from 'svelte/transition';
 
