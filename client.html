@@ -13,12 +13,13 @@
     <a onclick="openScanner()">Open scanner tool</a>
     <script>
       function openScanner() {
-        let s = window.open(`./index.html#scan-and-post-to-${window.origin}`);
+        const scannerOrigin = window.origin; // replace this with the hosted scanner origin
+        const s = window.open(`./index.html#scan-and-post-to-${window.origin}`);
         window.addEventListener('message', (event) => {
-          if (event.origin !== window.origin ||event.source !== s || !event.data.validated) {
+          if (event.origin !== scannerOrigin ||event.source !== s || !event.data.validated) {
             return;
           }
-          console.log('Received health card', event.data);
+          console.log('Received health card', event.data.validated);
           document.querySelector("pre#result").innerText = JSON.stringify(event.data.validated, null, 2);
         });
       }
