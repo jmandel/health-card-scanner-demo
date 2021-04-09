@@ -9,22 +9,17 @@
     <link rel="stylesheet" href="build/bundle.css" />
   </head>
   <body>
+    <pre id="result"></div>
     <a onclick="openScanner()">Open scanner tool</a>
     <script>
       function openScanner() {
         let s = window.open(`./index.html#scan-and-post-to-${window.origin}`);
         window.addEventListener('message', (event) => {
-          console.log('MSG', event);
-          if (event.origin !== window.origin) {
-            return;
-          }
-          if (event.source !== s) {
-            return;
-          }
-          if (!event.data.validated) {
+          if (event.origin !== window.origin ||event.source !== s || !event.data.validated) {
             return;
           }
           console.log('Received health card', event.data);
+          document.querySelector("pre#result").innerText = JSON.stringify(event.data.validate, null, 2);
         });
       }
     </script>
