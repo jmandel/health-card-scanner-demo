@@ -19,7 +19,7 @@
             return;
           }
           console.log('Received health card', event.data);
-          document.querySelector("pre#result").innerText = JSON.stringify(event.data.validate, null, 2);
+          document.querySelector("pre#result").innerText = JSON.stringify(event.data.validated, null, 2);
         });
       }
     </script>
