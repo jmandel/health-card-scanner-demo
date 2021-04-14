@@ -30,12 +30,13 @@
         if (qrTotal !== scannedPieces.length) {
           scannedPieces = new Array(qrTotal).fill(null);
         }
+        if (!scannedPieces[qrNumber - 1]) {
+          displayCheckMark = true;
+          setTimeout(() => {
+            displayCheckMark = false;
+          }, CHECKBOX_DISPLAY_MS);
+        }
         scannedPieces[qrNumber - 1] = qrValue;
-        displayCheckMark = true;
-        setTimeout(() => {
-          displayCheckMark = false;
-        }, CHECKBOX_DISPLAY_MS);
-
         if (scannedPieces.every((p) => !!p)) {
           let jws = scannedPieces.join("");
           dispatch("scanned", jws);
