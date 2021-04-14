@@ -21,6 +21,10 @@
       videoElement,
       (v) => {
         let parts = v.match(/shc:\/((\d+)\/(\d+)\/)?(\d+)/);
+        if (!parts) {
+          console.log("Null parts for", v)
+          return;
+        }
         let qrNumber = parseInt(parts[2]) || 1;
         let qrTotal = parseInt(parts[3]) || 1;
         let qrValue = parts[4]
