@@ -59,11 +59,9 @@
 
 <div class={instructionClass}>
   <div class={'checkboxes'}>
-    {#if scannedPieces.length > 1}
       {#each scannedPieces as p, i}
         <input type="checkbox" checked={!!p} />
       {/each}
-    {/if}
   </div>
   <h1 in:fade out:fade>Scan QR</h1>
 </div>
@@ -77,10 +75,5 @@
   h1 {
     margin: 0px;
     padding: 0px;
-  }
-  button {
-    margin-bottom: 0.5em;
-    border-radius: 2em;
-    border: 2px solid #ff3e00;
   }
 </style>

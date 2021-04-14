@@ -70,9 +70,9 @@
     grid-row: 2/3;
     grid-column: 2/3;
     object-fit: cover;
-    width: min(100vmin, 100%);
-    height: min(60vh, 100%);
-    border-radius: 10vmin;
+    width: 100%;
+    height: min(80vh, 100%);
+    border-radius: 2vmin;
     justify-self: center;
   }
 
@@ -82,8 +82,9 @@
     margin-top: 1em;
     width: 100% !important;
     margin-bottom: 0.5em;
-    border-radius: 2em;
     border: 2px solid #ff3e00;
+    border-radius: 2vmin;
+    font-size: 2em;
   }
 
   main {
@@ -91,7 +92,7 @@
     display: grid;
     margin: 0px;
     box-sizing: border-box;
-    grid-template-rows: 20vh auto 15vh;
+    grid-template-rows: 10vh auto 15vh;
     grid-template-columns: 2em auto 2em;
     height: 100%;
   }
@@ -108,7 +109,6 @@
     font-weight: 1000;
     width: 100%;
     line-height: 1.1;
-    max-width: 14rem;
     grid-row: 1 / 2;
     grid-column: 1/4;
     font-family: Arial, Helvetica, sans-serif;
