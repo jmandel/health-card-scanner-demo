@@ -1,24 +1,26 @@
 <script lang="ts">
   // import base64url from 'base64url';
-  import HealthCardScanner from './HealthCardScanner.svelte';
-  import { HealthCard, fromJws } from './HealthCard';
+  import HealthCardScanner from "./HealthCardScanner.svelte";
+  import { HealthCard, fromJws } from "./HealthCard";
   export let scanning = true;
 
-  import base64url from 'base64url';
-  import { onMount } from 'svelte';
+  import base64url from "base64url";
+  import { onMount } from "svelte";
 
   let postToOrigin: string | false = false;
 
   onMount(() => {
-    const postToOriginCommand = window.location.hash.match(/#scan-and-post-to-(.+)/);
+    const postToOriginCommand = window.location.hash.match(
+      /#scan-and-post-to-(.+)/
+    );
     if (postToOriginCommand) {
       postToOrigin = postToOriginCommand[1];
     }
   });
 
   function postAndClose(c: HealthCard) {
-    window.opener.postMessage(c, '*');
-    window.close()
+    window.opener.postMessage(c, "*");
+    window.close();
   }
 
   let cards: HealthCard[] = [];
@@ -40,18 +42,22 @@
       }}
     />
   {:else}
-    <ul class="scanner-video">
-      <h2>Scanned Health Cards</h2>
+    <h2 class="scanner-instruction">Scanned Health Cards</h2>
+    <div class="scanner-video">
       {#each cards as card}
-        <li>{JSON.stringify(card.validated?.vc?.credentialSubject?.fhirBundle, null, 2)}</li>
+        <pre
+          class="scanner-video">{JSON.stringify(card.validated?.vc?.credentialSubject?.fhirBundle, null, 2)}</pre>
+        <hr />
       {/each}
-    </ul>
+    </div>
     {#if cards.length === 1 && postToOrigin !== false}
-      <button class={'bottom-button'} on:click={() => postAndClose(cards[0])}
+      <button class={"bottom-button"} on:click={() => postAndClose(cards[0])}
         >Send to <b>{postToOrigin}</b></button
       >
     {:else}
-      <button class={'bottom-button'} on:click={() => (scanning = true)}>Scan</button>
+      <button class={"bottom-button"} on:click={() => (scanning = true)}
+        >Scan</button
+      >
     {/if}
   {/if}
 </main>
@@ -69,11 +75,8 @@
   :global .scanner-video {
     grid-row: 2/3;
     grid-column: 2/3;
-    object-fit: cover;
-    width: 100%;
-    height: min(80vh, 100%);
-    border-radius: 2vmin;
-    justify-self: center;
+
+    text-align: left;
   }
 
   :global .bottom-button {

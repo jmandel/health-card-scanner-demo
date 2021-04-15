@@ -91,6 +91,14 @@
     margin: 0px;
     padding: 0px;
   }
+  video {
+    object-fit: cover;
+    width: 100%;
+    height: min(80vh, 100%);
+    border-radius: 2vmin;
+    justify-self: center;
+
+  }
   input.centered {
     width: 40vmin;
     height: 40vmin;
