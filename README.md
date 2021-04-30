@@ -1,7 +1,7 @@
 # Health Card Scanner
 
 * **Standalone** mode: scans QRs, and shows the results. https://joshuamandel.com/health-card-scanner-demo
-* **Scanner Service** mode: scans QRs and sends them to the caller via window.postMessage. https://joshuamandel.com/health-card-scanner-demo#scan-and-post-to-{origin}, where the origin variable is replaced with the caller's origin (e.g., #scan-and-post-to-https://myapp.example.com).
+* **Scanner Service** mode: scans QRs and sends them to the caller via window.postMessage. https://joshuamandel.com/health-card-scanner-demo#scan-and-post-to-{origin}, where the origin variable is replaced with the caller's origin (e.g., `#scan-and-post-to-https://myapp.example.com`).
 
 
 # Svelte Webpack Starter
