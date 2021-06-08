@@ -87,7 +87,6 @@
     margin-bottom: 0.5em;
     border: 2px solid #ff3e00;
     border-radius: 2vmin;
-    font-size: 2em;
   }
 
   main {
