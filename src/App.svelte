@@ -46,7 +46,7 @@
     <div class="scanner-video">
       {#each cards as card}
         <pre
-          class="scanner-video">{JSON.stringify(card.validated?.vc?.credentialSubject?.fhirBundle, null, 2)}</pre>
+          class="scanner-video">{JSON.stringify(card.validated, null, 2)}</pre>
         <hr />
       {/each}
     </div>
