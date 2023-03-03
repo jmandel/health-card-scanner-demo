@@ -1,0 +1,24 @@
+javascript:(function() {
+
+function automate(insurerNameInput, nemberId) {
+    let insurerNameWords = insurerNameInput.toLowerCase().split(/\s+/);
+    $("#addCoverageButton a").click();
+    let insurers = Array.from($("#payors option")).map(o => [o.value, insurerNameWords.filter(w => o.innerText.toLowerCase().split(/\s+/).includes(w)).length]);
+    insurers.sort((a, b) => b[1] - a[1]);
+    $("#payors").val(insurers[0][0]).change();
+    $("#memberId").val("123").change();
+}
+window.addEventListener("message", e => {
+  let coverage = e.data.validated.vc.credentialSubject.fhirBundle.entry.filter(e => e.resource.resourceType === "Coverage")[0].resource;
+  let patient = e.data.validated.vc.credentialSubject.fhirBundle.entry.filter(e => e.resource.resourceType === "Patient")[0].resource;
+  let payor = coverage.payor.display;
+  console.log("payor", payor);
+  let memberId = patient.identifier[0].value;
+  console.log("member", memberId);
+  automate(payor, memberId);
+});
+
+console.log("opening");
+let w=window.open(`https://joshuamandel.com/health-card-scanner-demo#scan-and-post-to-${window.location.origin}`);
+setInterval(()=>{w.postMessage("handshake", "https://joshuamandel.com")}, 1000)
+})()
