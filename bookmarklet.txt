@@ -1,11 +1,12 @@
 javascript:(function() {
 
-function automate(insurerNameInput, nemberId) {
+function automate(insurerNameInput, memberId) {
     let insurerNameWords = insurerNameInput.toLowerCase().split(/\s+/);
     $("#addCoverageButton a").click();
     let insurers = Array.from($("#payors option")).map(o => [o.value, insurerNameWords.filter(w => o.innerText.toLowerCase().split(/\s+/).includes(w)).length]);
     insurers.sort((a, b) => b[1] - a[1]);
     $("#payors").val(insurers[0][0]).change();
+    console.log("Setting", memberId);
     $("#memberId").val(memberId).change();
 }
 window.addEventListener("message", e => {
