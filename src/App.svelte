@@ -8,18 +8,34 @@
   import { onMount } from "svelte";
 
   let postToOrigin: string | false = false;
+  let postToWindow = window.opener;
 
   onMount(() => {
+
     const postToOriginCommand = window.location.hash.match(
       /#scan-and-post-to-(.+)/
     );
     if (postToOriginCommand) {
       postToOrigin = postToOriginCommand[1];
+      if (postToWindow === null) {
+        function handshake(e: MessageEvent) {
+          if (e.origin === postToOrigin) {
+            if (e.data === "handshake") {
+              postToWindow = e.source
+              console.log("GOT PTW", e.source)
+              window.removeEventListener("message", handshake)
+            }
+          }
+        }
+        window.addEventListener("message", handshake)
+        window.addEventListener("message",(e) => {console.log("E", e);})
+      }
     }
   });
 
   function postAndClose(c: HealthCard) {
-    window.opener.postMessage(c, "*");
+    // window.t = {postToWindow, postToOrigin, c}
+    postToWindow.postMessage(c, postToOrigin);
     window.close();
   }
 
