@@ -6,7 +6,7 @@ function automate(insurerNameInput, nemberId) {
     let insurers = Array.from($("#payors option")).map(o => [o.value, insurerNameWords.filter(w => o.innerText.toLowerCase().split(/\s+/).includes(w)).length]);
     insurers.sort((a, b) => b[1] - a[1]);
     $("#payors").val(insurers[0][0]).change();
-    $("#memberId").val("123").change();
+    $("#memberId").val(memberId).change();
 }
 window.addEventListener("message", e => {
   let coverage = e.data.validated.vc.credentialSubject.fhirBundle.entry.filter(e => e.resource.resourceType === "Coverage")[0].resource;
